@@ -1,0 +1,474 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "title":"E-commerce Page",
+        "description":"E-commerce web Application",
+        "version":"1.0.0"
+    },
+    "host":"localhost:4800",
+    "securityDefinitions":{
+        "JWT":{
+            "in":"header",
+            "name":"Authorization",
+            "type":"apiKey"
+        }
+    },
+    "paths":{
+        "/api/SignUp":{
+            "post":{
+                "tags":["User routes"],
+                "summary":"register",
+                "description":"registering users",
+                "parameters":[{
+                    "in":"body",
+                    "name":"body",
+                    "description":"user details",
+                    "schema":{
+                        "type":"object",
+                        "properties":{
+                            "name":{
+                                "type":"string"
+                            },
+                            "email":{
+                                "type":"string"
+                            },
+                            "password":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"something wrong"
+                    }
+                }
+            }
+        },
+        "/api/signIn":{
+            "post":{
+                "tags":["User routes"],
+                "summary":"login",
+                "description":"user login to get token",
+                "parameters":[{
+                    "in":"body",
+                    "name":"body",
+                    "description":"user creds",
+                    "schema":{
+                        "type":"object",
+                        "properties":{
+                            "email":{
+                                "type":"string"
+                            },
+                            "password":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"Invalid creds"
+                    }
+                }
+            }
+        },
+        "/api/posts/all":{
+            "get":{
+                "tags":["Post routes"],
+                "summary":"Get All Posts",
+                "description":"Getting All Posts",
+                "security":[{"JWT":{}}],
+                
+                "responses":{
+                    "200":{
+                        "description":"successfully fetched all posts"
+                    },
+                    "400":{
+                        "description":"there is no posts present"
+                    }
+                }
+            }
+        },
+        "/api/posts":{
+            "get":{
+                "tags":["Post routes"],
+                "summary":"Get post By userId",
+                "description":"Get post By userId",
+                "security":[{"JWT":{}}],
+                
+                "responses":{
+                    "200":{
+                        "description":"successfully fetched all posts"
+                    },
+                    "400":{
+                        "description":"there is no posts present"
+                    }
+                }
+            },
+            "post":{
+                "tags":["Post routes"],
+                "summary":"Add new Post",
+                "description":"Adding new Post",
+                "security":[{"JWT":{}}],
+                
+                "responses":{
+                    "200":{
+                        "description":"successfully fetched all posts"
+                    },
+                    "400":{
+                        "description":"there is no posts present"
+                    }
+                }
+            }
+        },
+        "/api/posts/sort":{
+            "get":{
+                "tags":["Post routes"],
+                "summary":"Get Sorted Posts By Date",
+                "description":"Get Sorted Posts",
+                "security":[{"JWT":{}}],
+                
+                "responses":{
+                    "200":{
+                        "description":"successfully fetched all posts"
+                    },
+                    "400":{
+                        "description":"there is no posts present"
+                    }
+                }
+            }
+        },
+        "/api/posts/{id}":{
+            "get":{
+                "tags":["Post routes"],
+                "summary":"Get a post by id",
+                "description":"get a post by id",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            },
+            "delete":{
+                "tags":["Post routes"],
+                "summary":"Delete a post by id",
+                "description":"Delete a post by id",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            },
+            "put":{
+                "tags":["Post routes"],
+                "summary":"Update a post by id",
+                "description":"Update a post by id",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            }
+        },
+        "/api/posts/filter":{
+            "post":{
+                "tags":["Post routes"],
+                "summary":"filter Products",
+                "description":"filter products",
+                "security":[{"JWT":{}}],
+                "parameters":[{
+                    "in":"body",
+                    "name":"body",
+                    "description":"caption",
+                    "schema":{
+                        "type":"object",
+                        "properties":{
+                            "caption":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"Captions Not Found for your caption"
+                    }
+                }
+            }
+        },
+        "/api/archive/post/{id}":{
+            "put":{
+                "tags":["Post routes"],
+                "summary":"Archive",
+                "description":"Archive",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            }
+        },
+        "/api/draft/post":{
+            "post":{
+                "tags":["Post routes"],
+                "summary":"Draft",
+                "description":"Draft",
+                "security":[{"JWT":{}}],
+                "parameters":[{
+                    "in":"body",
+                    "name":"body",
+                    "description":"post data",
+                    "schema":{
+                        "type":"object",
+                        "properties":{
+                            "caption":{
+                                "type":"string"
+                            },
+                            "imageUrl":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            }
+        },
+        "/api/bookmark/post/{id}":{
+            "put":{
+                "tags":["Post routes"],
+                "summary":"bookmark",
+                "description":"bookmark",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            },
+            "delete":{
+                "tags":["Post routes"],
+                "summary":"remove bookmark",
+                "description":"remove bookmark",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            }
+        },
+        "/api/comments/{id}":{
+            "get":{
+                "tags":["Comments"],
+                "summary":"Get Comments By Id",
+                "description":"getting comments by id",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            },
+            "post":{
+                "tags":["Comments"],
+                "summary":"Add new comment to particular post",
+                "description":"Add new Comment",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            },
+            "delete":{
+                "tags":["Comments"],
+                "summary":"Delete a comment",
+                "description":"Delete a comment by id",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            },
+            "put":{
+                "tags":["Comments"],
+                "summary":"Update Comment",
+                "description":"Update a comment by id",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            }
+        },
+        "/api/likes/{postId}":{
+            "get":{
+                "tags":["Likes"],
+                "summary":"Get All Likes",
+                "description":"Get All Likes by id",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"postId",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            }
+        },
+        "/api/likes/toggle/{postId}":{
+            "get":{
+                "tags":["Likes"],
+                "summary":"Like & Un-Like",
+                "description":"Toggle Like for a particular post",
+                "security":[{"JWT":{}}],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"postId",
+                        "type":"integer"                    
+                    }
+            ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    },
+                    "400":{
+                        "description":"not found"
+                    }
+                }
+            }
+        }
+    }
+}  
